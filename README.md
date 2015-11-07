@@ -25,7 +25,7 @@ and header/footer data.
 
 ## Usage
 
-    convertor <in_docbook_file> [<out_docx_file>] [<docx_template_file>]
+    python3 docbook2docx.py <in_docbook_file> [<out_docx_file>] [<docx_template_file>]
 
 When script finishes work open docx document, select all and press `F9` in order to update
 automatically generated fields (ToC, figures/tables, links, etc).
