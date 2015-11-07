@@ -1,0 +1,5 @@
+<documentYear>{documentYear}</documentYear>
+<documentType>{documentType}</documentType>
+<productType>{productType}</productType>
+<productFullName>{productFullName}</productFullName>
+<productShortName>{productShortName}</productShortName>

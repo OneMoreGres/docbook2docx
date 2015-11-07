@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+
+<book lang="ru">
+<bookinfo>
+<date>2015-11-07</date>
+<documentYear>2015</documentYear>
+<documentType>Статья</documentType>
+<productType>Скрипт</productType>
+<productFullName>Конвертор docbook в docx</productFullName>
+<productShortName>Конвертор</productShortName>
+</bookinfo>
+<toc/>
+<chapter id="_заголовок1">
+<title>Заголовок1</title>
+<section id="_заголовок2">
+<title>Заголовок2</title>
+<section id="_заголовок3">
+<title>Заголовок3</title>
+<section id="_заголовок4">
+<title>Заголовок4</title>
+<simpara>Абзац.
+Разделить абзацев- пустая строка, а не конец строки.</simpara>
+<simpara>Новый абзац. Подстановка переменной значение.</simpara>
+<literallayout class="monospaced">Параграф, начинающийся с пробела(ов) - не форматируется (что-то вроде цитаты, текста программы).</literallayout>
+Передается в исходном виде, без подстановок {name}.
+<blockquote>
+<simpara>Цитата</simpara>
+</blockquote>
+<simpara>Текст программы (образец сообщений)..</simpara>
+<screen>QApplication app(argc, argv);
+app.exec();</screen>
+<formalpara><title>Практически у любого элемента может быть заголовок (идет перед текстом и начинается с .)</title><para>Разрыв<?asciidoc-br?>
+строки</para></formalpara>
+<simpara>Нормальный, <emphasis>курсив</emphasis>, <emphasis role="strong">полужирный</emphasis>, <superscript>верхний</superscript>, <subscript>нижний</subscript> текст.</simpara>
+<simpara id="metka_teksta">Текст с меткой</simpara>
+<simpara>Ссылка на метку <xref linkend="metka_teksta"/></simpara>
+<simpara><ulink url="cheatsheet.adoc">Ссылка на сайт или файл</ulink></simpara>
+<figure id="metka-risunka"><title>Заголовок рисунка</title>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="img.png"/>
+  </imageobject>
+  <textobject><phrase>img.png</phrase></textobject>
+</mediaobject>
+</figure>
+<simpara>Ссылка на рисунок <xref linkend="metka-risunka"/></simpara>
+<simpara>Вставка внешнего файла:</simpara>
+<itemizedlist><title>Списки</title>
+<listitem>
+<simpara>
+С маркером
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+С маркером
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+С маркером
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+С маркером
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+С маркером
+</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+Стандартные значки в зависимости от уровня
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Стандартные значки в зависимости от уровня
+</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>
+Стандартные значки в зависимости от уровня
+</simpara>
+<orderedlist numeration="lowerroman">
+<listitem>
+<simpara>
+Стандартные значки в зависимости от уровня
+</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>
+Стандартные значки в зависимости от уровня
+</simpara>
+</listitem>
+</orderedlist>
+<simpara>Список также можно разбивать любым параграфом.</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>
+С текстом
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+С текстом
+</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+Нумерованный
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Нумерованный
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Нумерованный
+</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+<formalpara><title>Таблицы</title><para>Образцы таблиц</para></formalpara>
+<table
+frame="all"
+rowsep="1" colsep="1"
+>
+<title>Обычная таблица, неудобно рисовать</title>
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33*"/>
+<colspec colname="col_2" colwidth="33*"/>
+<colspec colname="col_3" colwidth="33*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Col 1</entry>
+<entry align="left" valign="top">Col 2      </entry>
+<entry align="left" valign="top">Col 3</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+<entry align="left" valign="top"><simpara>Item 1</simpara></entry>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>2</simpara></entry>
+<entry align="left" valign="top"><simpara>Item 2</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+<entry align="left" valign="top"><simpara>Item 3</simpara></entry>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>6</simpara></entry>
+<entry align="left" valign="top"><simpara>Three items</simpara></entry>
+<entry align="left" valign="top"><simpara>d</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table
+frame="all"
+rowsep="1" colsep="1"
+>
+<title>Таблица с данными, через запятую</title>
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="25*"/>
+<colspec colname="col_3" colwidth="25*"/>
+<colspec colname="col_4" colwidth="25*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Заголовок</entry>
+<entry align="left" valign="top">Заголовок</entry>
+<entry align="left" valign="top">Заголовок</entry>
+<entry align="left" valign="top">Заголовокы</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+<entry align="left" valign="top"><simpara>2</simpara></entry>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+<entry align="left" valign="top"><simpara>4</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+<entry align="left" valign="top"><simpara>d</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>A</simpara></entry>
+<entry align="left" valign="top"><simpara>B</simpara></entry>
+<entry align="left" valign="top"><simpara>C</simpara></entry>
+<entry align="left" valign="top"><simpara>D</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</section>
+</section>
+</section>
+</chapter>
+</book>
