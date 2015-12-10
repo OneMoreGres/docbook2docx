@@ -542,6 +542,7 @@ class Converter:
                 tag = SupportedTags[params]
             elif name == 'Format':
                 formatArgs[params[0]] = self.execFunc(params[1])
+        text = ''
         if tag:
             text = tag.format(**formatArgs)
         return text
