@@ -539,7 +539,7 @@ class Converter:
         for command in rule:
             name, params = command[0], command[1]
             if name == 'Tag':
-                tag = SupportedTags[params]
+                tag = SupportedTags[self.execFunc(params)]
             elif name == 'Format':
                 formatArgs[params[0]] = self.execFunc(params[1])
         text = ''
