@@ -10,6 +10,8 @@ from sys import argv
 from PIL import Image
 
 SupportedTags = {
+'empty': '',
+
 'doc':
 u'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
@@ -30,7 +32,7 @@ u'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 'appendix':
 u'''<w:p>
   <w:pPr><w:pStyle w:val="{style}"/></w:pPr>{bookmarkStart}
-  <w:r><w:t></w:t></w:r>{bookmarkEnd}
+  <w:r><w:t>{text}</w:t></w:r>{bookmarkEnd}
 </w:p>{childTexts}''',
 
 'heading':
@@ -292,10 +294,16 @@ class State:
         
         self.tableCellCol = -1
         
+        self.isAppendixSingle = None
+        self.singleAppendixId = ''
+        
         self.listTags = ['orderedlist','itemizedlist']
         self.headingTags = ['section','chapter','preface', 'appendix']
         
     def enterTag(self, tagName, node):
+        if self.isAppendixSingle == None:
+            self.isAppendixSingle = (self.checkAppendixes(node) == 1)
+
         if tagName in self.listTags:
             self.currentListLevel += 1
             if self.currentListLevel == 0:
@@ -330,7 +338,8 @@ class State:
             self.lastBookmarkName = ''
             
         if tagName == 'xref':
-            self.lastXrefName = self.addBookmark(node.attrib['linkend'])[0]
+            if node.attrib['linkend'] != self.singleAppendixId:
+                self.lastXrefName = self.addBookmark(node.attrib['linkend'])[0]
             
         if tagName == 'emphasis':
             self.lastEmphasisTagNames.append('' if 'role' not in node.attrib else node.attrib['role'])
@@ -401,7 +410,27 @@ class State:
             wordTag = {'strong': '<w:b/>', '': '<w:i/>'}[tag]
             tags.append(wordTag)
         return ''.join(tags)
-    
+
+    def xrefTag(self):
+        return 'empty' if self.lastXrefName == '' else 'xref'
+
+    def checkAppendixes(self, node):
+        if getTagName(node) == 'appendix':
+            self.singleAppendixId = node.attrib['id']
+            return 1
+        appendixes = 0
+        for child in node:
+            appendixes += self.checkAppendixes(child)
+        if appendixes > 1:
+            self.singleAppendixId = ''
+        return appendixes
+
+    def appendixStyle(self):
+        return 'AppendixSingle' if self.isAppendixSingle else 'Appendix'
+
+    def appendixText(self):
+        return 'Приложение' if self.isAppendixSingle else ''
+
 
 
 
@@ -431,7 +460,7 @@ class Converter:
         rules['//chapter/title'] = 'Tag=heading, Format=style:state.headingStyle'
         rules['//section/title'] = 'Tag=heading, Format=style:state.headingStyle'
         rules['//glossary/title'] = 'Tag=heading, Format=style:GlossaryTitle'
-        rules['//appendix'] = 'Tag=appendix, Format=style:Appendix'
+        rules['//appendix'] = 'Tag=appendix, Format=style:state.appendixStyle, Format=text:state.appendixText'
         rules['//appendix/title'] = 'Tag=heading, Format=style:AppendixHeading1, Format=bookmarkStart: , Format=bookmarkEnd: '
         rules['//appendix/chapter/title'] = 'Tag=heading, Format=style:state.appendixHeadingStyle'
         rules['//appendix/section/title'] = 'Tag=heading, Format=style:state.appendixHeadingStyle'
@@ -450,7 +479,7 @@ class Converter:
         rules['//glossary//varlistentry'] = 'Tag=tableRow'
         rules['//glossary//varlistentry/term'] = 'Tag=glossatyTermCell, Format=style:GlossaryEntry'
         rules['//glossary//varlistentry//simpara'] = 'Tag=tableCellBorderless, Format=style:GlossaryEntry'
-        rules['//xref'] = 'Tag=xref, Format=bookmarkRefName:state.lastXrefName'
+        rules['//xref'] = 'Tag=state.xrefTag, Format=bookmarkRefName:state.lastXrefName'
         rules['//programlisting/simpara'] = 'Tag=paragraph, Format=style:ProgramListing'
         rules['//literallayout'] = 'Tag=paragraph, Format=style:Paragraph'
         rules['//emphasis'] = 'Tag=emphasis, Format=emphasisTags:state.lastEmphasisTags'
