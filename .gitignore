@@ -1,1 +1,6 @@
 tests/docbook.docx
+/word/
+/docbook.xml
+/img.png
+/out.docx
+/template.docx
