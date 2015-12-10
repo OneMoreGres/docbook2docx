@@ -811,7 +811,7 @@ def registerXmlNamespaces():
     ET.register_namespace('pic', 'http://schemas.openxmlformats.org/drawingml/2006/picture')
 
 def usage():
-    print('Usage: docbook2docx.py <in_docbook_file> [<out_docx_file>] [<docx_template_file>]')
+    print('Usage: convertor <in_docbook_file> [<out_docx_file>] [<docx_template_file>]')
 
 def mainFunc(argv):
     if len(argv) < 1:
