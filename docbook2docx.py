@@ -629,7 +629,7 @@ class Converter:
         numbering = self.readFile(self.numberingFileName)
         lists = []
         usedLists = self.state.usedLists
-        numFormats = {'itemizedlist': 'bullet', 'orderedlist': 'decimal', 'arabic': 'decimal', 'loweralpha': 'lowerLetter', 'bullet': 'bullet'}
+        numFormats = {'itemizedlist': 'bullet', 'orderedlist': 'decimal', 'arabic': 'decimal', 'loweralpha': 'lowerLetter', 'lowerroman': 'lowerLetter', 'bullet': 'bullet'}
         for listId, entries in usedLists.items():
             abstractLvls = []
             abstractLvlText = '' # combines with previous lvls
