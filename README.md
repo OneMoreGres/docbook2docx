@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/OneMoreGres/docbook2docx.svg)]
-(https://travis-ci.org/OneMoreGres/docbook2docx.svg)
+![Build Status](https://travis-ci.org/OneMoreGres/docbook2docx.svg)
 
 # Docbook to docx conversion script
 
